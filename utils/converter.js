@@ -38,7 +38,8 @@ const PowerPointToPdf = async (inputFileName, outputDir, timestamp = new Date().
         fs.mkdirSync(outputDir);
       }
       let outputPdfFile = outputDir + timestamp + '.pdf';
-      let pdfConversionCommand = 'unoconv -f pdf -o ' + outputPdfFile + ' ' + inputFileName;
+      // let pdfConversionCommand = 'unoconv -f pdf -o ' + outputPdfFile + ' ' + inputFileName;
+      let pdfConversionCommand = '"C:/Program Files/LibreOffice/program/python.exe"' + ' ' + '"C:/unoconv.py"' + ' ' + '-f pdf -o ' + outputPdfFile + ' ' + inputFileName;
       exec(pdfConversionCommand, (error, stdout, stderr) => {
         if (error) {
           console.error(error);
@@ -60,13 +61,13 @@ const PdfToImages = async (inputFileName, outputDir, timestamp = new Date().getT
         fs.mkdirSync(outputDir);
       }
       let outputImageFile = outputDir + timestamp + '.png';
-      let pdfConversionCommand = 'convert -resize 1200 -density 200 ' + inputFileName + ' ' + outputImageFile;
+      let pdfConversionCommand = 'magick convert -resize 1200 -density 200 ' + inputFileName + ' ' + outputImageFile;
       exec(pdfConversionCommand, (error, stdout, stderr) => {
         if (error) {
           console.error(error);
           reject(error);
         }
-        let listfileCommand = 'ls -rt ' + outputDir + timestamp + '*.png'
+        let listfileCommand = 'ls ' + outputDir + timestamp + '*.png'
         exec(listfileCommand, (error, stdout, stderr) => {
           if (error) {
             console.error(error);
