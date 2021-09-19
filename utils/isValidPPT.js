@@ -6,5 +6,5 @@
  */
 module.exports.isValidPPT = (file) => {
     const type = file.name.split(".").pop();
-    return type !== "pptx" || type !== "ppt" ? false : true;
+    return !["pptx", "ppt"].includes(type) ? false : true;
 };

@@ -141,19 +141,17 @@ const createContent = async (req, res, next) => {
       }
 
       // Convert the pptx to images
-      powerpointToImages(pptx.path, 'public').then(imageAray => {
-        console.log("Images Data ", imageAray);
-        // construct bulk url array
-        for (let index = 0; index < imageAray.length; index++) {
-          bulk_url.push({
-            content_type,
-            url: imageAray[index],
-            delay_time,
-            content_id: new_content.content_id,
-          });
-        }
-        db.contents_urls.bulkCreate(bulk_url); // save urls in db
-      })
+      const imageAray = await powerpointToImages(pptx.path, 'public/');
+      // construct bulk url array
+      for (let index = 0; index < imageAray.length; index++) {
+        bulk_url.push({
+          content_type: "image",
+          url: imageAray[index],
+          delay_time,
+          content_id: new_content.content_id,
+        });
+      }
+      db.contents_urls.bulkCreate(bulk_url); // save urls in db
     }
 
     // Emit event to reload the page

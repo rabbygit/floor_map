@@ -2,10 +2,10 @@ const Config = function () {
   switch (process.env.NODE_ENV) {
     case 'production':
       return {
-        username: 'root',
+        username: 'picktask',
         dbName: 'floor_map',
-        password: '',
-        host: 'localhost',
+        password: 'e!1btl[3J8$KCm/o',
+        host: '174.138.27.189',
         dialect: 'mysql',
       };
 
