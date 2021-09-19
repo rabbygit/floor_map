@@ -24,7 +24,8 @@ app.use("/api/public", express.static('public'));
 const io = new Server(server, {
   // options
   cors: {
-    origin: "http://localhost:8080",
+    // origin: "http://localhost:8080",
+    origin: '*',
     methods: ["GET", "POST"],
   }
 });
